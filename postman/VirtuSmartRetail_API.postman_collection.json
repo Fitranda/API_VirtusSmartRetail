@@ -1,0 +1,772 @@
+{
+  "info": {
+    "name": "VirtuSmartRetail API",
+    "description": "Complete API documentation for VirtuSmartRetail - Point of Sale and Retail Management System",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{auth_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000/api/v1",
+      "type": "string"
+    },
+    {
+      "key": "auth_token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "description": "API endpoints for user authentication",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            },
+            "description": "Login to get authentication token"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Karyawan Management",
+      "description": "API endpoints for employee management",
+      "item": [
+        {
+          "name": "Get All Karyawan",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/karyawan?page=1&limit=10&search=",
+              "host": ["{{base_url}}"],
+              "path": ["karyawan"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "search",
+                  "value": ""
+                }
+              ]
+            },
+            "description": "Get all employees with pagination and search"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Karyawan by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/karyawan/1",
+              "host": ["{{base_url}}"],
+              "path": ["karyawan", "1"]
+            },
+            "description": "Get employee by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Karyawan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nama\": \"John Doe\",\n  \"posisi\": \"Kasir\",\n  \"gaji_pokok\": 3000000,\n  \"id_shift\": 1,\n  \"username\": \"johndoe\",\n  \"password\": \"password123\",\n  \"email\": \"john@example.com\",\n  \"id_role\": 2,\n  \"status\": \"aktif\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/karyawan",
+              "host": ["{{base_url}}"],
+              "path": ["karyawan"]
+            },
+            "description": "Create new employee"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Karyawan",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nama\": \"John Doe Updated\",\n  \"posisi\": \"Senior Kasir\",\n  \"gaji_pokok\": 3500000\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/karyawan/1",
+              "host": ["{{base_url}}"],
+              "path": ["karyawan", "1"]
+            },
+            "description": "Update employee data"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Karyawan",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/karyawan/1",
+              "host": ["{{base_url}}"],
+              "path": ["karyawan", "1"]
+            },
+            "description": "Delete employee"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Produk Management",
+      "description": "API endpoints for product management",
+      "item": [
+        {
+          "name": "Get All Produk",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/produk?page=1&limit=10&search=&kategori=",
+              "host": ["{{base_url}}"],
+              "path": ["produk"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "search",
+                  "value": ""
+                },
+                {
+                  "key": "kategori",
+                  "value": ""
+                }
+              ]
+            },
+            "description": "Get all products with pagination and filtering"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Produk",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nama_produk\": \"Laptop Asus\",\n  \"kategori\": \"Elektronik\",\n  \"stok\": 10,\n  \"harga_beli\": 8000000,\n  \"harga_jual\": 10000000\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/produk",
+              "host": ["{{base_url}}"],
+              "path": ["produk"]
+            },
+            "description": "Create new product"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Supplier Management",
+      "description": "API endpoints for supplier management",
+      "item": [
+        {
+          "name": "Get All Suppliers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/supplier?page=1&limit=10&search=",
+              "host": ["{{base_url}}"],
+              "path": ["supplier"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "search",
+                  "value": ""
+                }
+              ]
+            },
+            "description": "Get all suppliers with pagination and search"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Supplier",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nama_supplier\": \"PT. Teknologi Maju\",\n  \"kontak\": \"081234567890\",\n  \"alamat\": \"Jl. Sudirman No. 123, Jakarta\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/supplier",
+              "host": ["{{base_url}}"],
+              "path": ["supplier"]
+            },
+            "description": "Create new supplier"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Pembelian Management",
+      "description": "API endpoints for purchase management",
+      "item": [
+        {
+          "name": "Get All Pembelian",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/pembelian?page=1&limit=10&search=&supplier=&start_date=&end_date=",
+              "host": ["{{base_url}}"],
+              "path": ["pembelian"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "search",
+                  "value": ""
+                },
+                {
+                  "key": "supplier",
+                  "value": ""
+                },
+                {
+                  "key": "start_date",
+                  "value": ""
+                },
+                {
+                  "key": "end_date",
+                  "value": ""
+                }
+              ]
+            },
+            "description": "Get all purchases with pagination and filtering"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Pembelian",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_supplier\": 1,\n  \"no_faktur\": \"PO-2024-001\",\n  \"tanggal\": \"2024-01-15\",\n  \"items\": [\n    {\n      \"id_produk\": 1,\n      \"jumlah\": 5,\n      \"harga\": 8000000\n    },\n    {\n      \"id_produk\": 2,\n      \"jumlah\": 10,\n      \"harga\": 150000\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/pembelian",
+              "host": ["{{base_url}}"],
+              "path": ["pembelian"]
+            },
+            "description": "Create new purchase order"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Pembelian Stats",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/pembelian/stats",
+              "host": ["{{base_url}}"],
+              "path": ["pembelian", "stats"]
+            },
+            "description": "Get purchase statistics"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Pelanggan Management",
+      "description": "API endpoints for customer management",
+      "item": [
+        {
+          "name": "Get All Pelanggan",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/pelanggan?page=1&limit=10&search=",
+              "host": ["{{base_url}}"],
+              "path": ["pelanggan"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "search",
+                  "value": ""
+                }
+              ]
+            },
+            "description": "Get all customers with pagination and search"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Pelanggan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nama_pelanggan\": \"Jane Smith\",\n  \"kontak\": \"081234567890\",\n  \"alamat\": \"Jl. Merdeka No. 456, Surabaya\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/pelanggan",
+              "host": ["{{base_url}}"],
+              "path": ["pelanggan"]
+            },
+            "description": "Create new customer"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "POS/Penjualan",
+      "description": "API endpoints for point of sale operations",
+      "item": [
+        {
+          "name": "Create Sale",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_pelanggan\": 1,\n  \"tanggal_penjualan\": \"2024-01-15\",\n  \"items\": [\n    {\n      \"id_produk\": 1,\n      \"jumlah\": 2,\n      \"harga_satuan\": 10000000\n    },\n    {\n      \"id_produk\": 2,\n      \"jumlah\": 5,\n      \"harga_satuan\": 200000\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/pos/sale",
+              "host": ["{{base_url}}"],
+              "path": ["pos", "sale"]
+            },
+            "description": "Create new sale transaction"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Sales",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/pos/sales?page=1&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["pos", "sales"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Get all sales transactions"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Akun/Chart of Accounts",
+      "description": "API endpoints for chart of accounts management",
+      "item": [
+        {
+          "name": "Get All Akun",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/akun?page=1&limit=10&tipe=",
+              "host": ["{{base_url}}"],
+              "path": ["akun"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "tipe",
+                  "value": ""
+                }
+              ]
+            },
+            "description": "Get all accounts with pagination and filtering by type"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Akun",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nama_akun\": \"Kas\",\n  \"tipe\": \"Asset\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/akun",
+              "host": ["{{base_url}}"],
+              "path": ["akun"]
+            },
+            "description": "Create new account"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Jurnal",
+      "description": "API endpoints for journal entries",
+      "item": [
+        {
+          "name": "Get All Jurnal",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/jurnal?page=1&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["jurnal"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Get all journal entries"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Jurnal",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_akun\": 1,\n  \"tanggal_jurnal\": \"2024-01-15\",\n  \"keterangan\": \"Pembelian inventory\",\n  \"debet\": 5000000,\n  \"kredit\": 0\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/jurnal",
+              "host": ["{{base_url}}"],
+              "path": ["jurnal"]
+            },
+            "description": "Create new journal entry"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Penggajian",
+      "description": "API endpoints for payroll management",
+      "item": [
+        {
+          "name": "Get All Penggajian",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/penggajian?page=1&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["penggajian"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Get all payroll records"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Penggajian",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_karyawan\": 1,\n  \"tanggal\": \"2024-01-31\",\n  \"tunjangan\": 500000,\n  \"potongan\": 100000,\n  \"overtime\": 200000,\n  \"bonus\": 300000\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/penggajian",
+              "host": ["{{base_url}}"],
+              "path": ["penggajian"]
+            },
+            "description": "Create new payroll record"
+          },
+          "response": []
+        },
+        {
+          "name": "Generate Bulk Penggajian",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tanggal\": \"2024-01-31\",\n  \"karyawan_ids\": [1, 2, 3],\n  \"tunjangan_tambahan\": 100000,\n  \"potongan_umum\": 50000\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/penggajian/bulk",
+              "host": ["{{base_url}}"],
+              "path": ["penggajian", "bulk"]
+            },
+            "description": "Generate payroll for multiple employees"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Stokopname",
+      "description": "API endpoints for stock opname",
+      "item": [
+        {
+          "name": "Get All Stokopname",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/stokopname?page=1&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["stokopname"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Get all stock opname records"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Stokopname",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_produk\": 1,\n  \"tanggal_opname\": \"2024-01-15\",\n  \"jumlah_sebenarnya\": 45\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/stokopname",
+              "host": ["{{base_url}}"],
+              "path": ["stokopname"]
+            },
+            "description": "Create new stock opname record"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Absensi",
+      "description": "API endpoints for attendance management",
+      "item": [
+        {
+          "name": "Get All Absensi",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/absensi?page=1&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["absensi"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Get all attendance records"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Absensi",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_karyawan\": 1,\n  \"tanggal\": \"2024-01-15\",\n  \"jam_masuk\": \"08:00:00\",\n  \"status_hadir\": \"Hadir\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/absensi",
+              "host": ["{{base_url}}"],
+              "path": ["absensi"]
+            },
+            "description": "Create new attendance record"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
